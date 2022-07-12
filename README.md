@@ -2,7 +2,7 @@
 
 ### Development plan (estimation/real)
 0000. Check out TS (1h/1h)
-0001. UML-diagram (1h/)
+0001. UML-diagram (1h/2h)
 0002. MVI - research (1h/1h)
 0003. Request emploees (1h/)
 0004. Request emploees test (1h/)
@@ -22,3 +22,6 @@ Estimation: 21h /Real:
 ### MVI research results:
 1. [MVI Core Badoo](https://github.com/badoo/MVICore) need's a little but more time
 2. [MVI Kotlin](https://github.com/arkivanov/MVIKotlin) look's more easy
+
+### UML diagram
+<img src="./EmployeesUMLDiagram.svg">
