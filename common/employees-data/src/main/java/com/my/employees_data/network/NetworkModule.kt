@@ -9,7 +9,6 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,12 +30,10 @@ internal class NetworkModule {
     internal fun provideRetrofit(
         buildConfigWrapper: BuildConfigWrapper,
         okHttpClient: OkHttpClient,
-        rxAdapterFactory: CallAdapter.Factory,
         gsonConverterFactory: Converter.Factory
     ): Retrofit = Retrofit.Builder()
         .baseUrl(buildConfigWrapper.baseUrl())
         .client(okHttpClient)
-        .addCallAdapterFactory(rxAdapterFactory)
         .addConverterFactory(gsonConverterFactory)
         .build()
 
