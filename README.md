@@ -1,9 +1,9 @@
 # MyEmployeesTestTask
 
 ### Development plan (estimation/real)
-0000. Check out TS (1h/)
+0000. Check out TS (1h/1h)
 0001. UML-diagram (1h/)
-0002. MVI - research (1h/)
+0002. MVI - research (1h/1h)
 0003. Request emploees (1h/)
 0004. Request emploees test (1h/)
 0005. Save to Db (4h/)
@@ -18,3 +18,7 @@
 0014. UI emploees details (2h/)
 
 Estimation: 21h /Real:
+
+### MVI research results:
+1. [MVI Core Badoo](https://github.com/badoo/MVICore) need's a little but more time
+2. [MVI Kotlin](https://github.com/arkivanov/MVIKotlin) look's more easy
