@@ -8,5 +8,6 @@ class FetchEmployeeUseCase(
     private val employeesRepository: EmployeesRepository
 ) {
 
-    suspend fun invoke(id: String) = employeesRepository.fetchEmployee(id).copyWithCorrectBirthday()
+    suspend fun invoke(id: String) =
+        employeesRepository.fetchEmployee(id).copyWithCorrectInformation()
 }

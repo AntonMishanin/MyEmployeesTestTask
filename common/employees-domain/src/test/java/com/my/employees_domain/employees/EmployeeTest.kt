@@ -67,7 +67,7 @@ internal class EmployeeTest {
 
     @Test
     fun `test the name starts from lower case should return be correct`() {
-        val employee = employee(firstName = "иВан", lastName = "ИваноВ").copyWithCorrectName()
+        val employee = employee(firstName = "иВан", lastName = "ИваноВ").copyWithCorrectInformation()
         val actualFirst = employee.firstName
         val expectedFirst = "Иван"
         Assert.assertEquals(expectedFirst, actualFirst)

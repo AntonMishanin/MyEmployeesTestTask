@@ -1,6 +1,6 @@
 package com.my.employees_domain.employees
 
-import com.my.employees_domain.employees.Employee.Companion.copyWithCorrectBirthday
+import com.my.employees_domain.employees.Employee.Companion.copyWithCorrectInformation
 import kotlinx.coroutines.flow.map
 
 /**
@@ -13,5 +13,5 @@ class ObserveEmployeesUseCase(
 
     suspend fun invoke() = employeesRepository
         .observeEmployees()
-        .map { it.copyWithCorrectBirthday() }
+        .map { it.copyWithCorrectInformation() }
 }
