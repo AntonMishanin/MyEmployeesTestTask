@@ -7,7 +7,7 @@
 0003. Request employees (1h/1h)
 0004. Request employees test (1h/30m)
 0005. Save to Db (4h/5h) + tests
-0006. Offline-first logic (1h/)
+0006. Offline-first logic (1h/2h 30m)
 0007. Fetch specialties, employees, employee use cases (1h/)
 0008. Handle date logic (1h/)
 0009. Handle date test (1h/)
