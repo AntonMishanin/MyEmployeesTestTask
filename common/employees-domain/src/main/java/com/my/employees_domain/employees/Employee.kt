@@ -17,6 +17,33 @@ data class Employee(
     val specialties: List<Specialty>
 ) {
 
+    fun copyWithCorrectName(): Employee {
+        val firstName = startWithUpperCase(this.firstName)
+        val lastName = startWithUpperCase(this.lastName)
+        return if (
+            this.firstName == firstName &&
+            this.lastName == lastName
+        ) {
+            this
+        } else {
+            copy(firstName = firstName, lastName = lastName)
+        }
+    }
+
+    private fun startWithUpperCase(input: String): String {
+        val result = StringBuilder()
+
+        for (i in input.indices) {
+            val symbol = when (i == 0) {
+                true -> input[i].uppercase()
+                false -> input[i].lowercase()
+            }
+            result.append(symbol)
+        }
+
+        return result.toString()
+    }
+
     fun copyWithCorrectBirthday(): Employee {
 
         if (birthday.isEmpty()) return this
@@ -57,11 +84,11 @@ data class Employee(
             return this
         }
 
-        return if (firstInt <= MONTH_PER_YEAR && secondInt <= MONTH_PER_YEAR) {
+        return if (firstInt <= MONTHS_PER_YEAR && secondInt <= MONTHS_PER_YEAR) {
             copy(birthday = "$second.$first.$year")
-        } else if (firstInt <= MONTH_PER_YEAR && secondInt > MONTH_PER_YEAR) {
+        } else if (firstInt <= MONTHS_PER_YEAR && secondInt > MONTHS_PER_YEAR) {
             copy(birthday = "$second.$first.$year")
-        } else if (firstInt > MONTH_PER_YEAR && secondInt <= MONTH_PER_YEAR) {
+        } else if (firstInt > MONTHS_PER_YEAR && secondInt <= MONTHS_PER_YEAR) {
             copy(birthday = "$first.$second.$year")
         } else {
             // Wrong birthday
@@ -71,7 +98,7 @@ data class Employee(
 
     internal companion object {
         private const val YEAR_LENGTH = 4
-        private const val MONTH_PER_YEAR = 12
+        private const val MONTHS_PER_YEAR = 12
 
         fun List<Employee>.copyWithCorrectBirthday() = this.map { it.copyWithCorrectBirthday() }
     }
