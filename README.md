@@ -9,8 +9,8 @@
 0005. Save to Db (4h/5h) + tests
 0006. Offline-first logic (1h/2h 30m)
 0007. Fetch specialties, employees, employee use cases (1h/1h) + tests
-0008. Handle date logic (1h/)
-0009. Handle date test (1h/)
+0008. Handle date logic (1h/30m)
+0009. Handle date test (1h/30m)
 0010. Handle name and surname logic (1h/)
 0011. Handle name and surname test (1h/)
 0012. UI specialties (2h/)
