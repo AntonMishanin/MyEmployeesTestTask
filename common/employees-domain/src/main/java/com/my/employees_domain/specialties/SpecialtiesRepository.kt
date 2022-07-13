@@ -12,4 +12,6 @@ interface SpecialtiesRepository {
     suspend fun observeSpecialties(): Flow<List<Specialty>>
 
     suspend fun saveSpecialties(data: List<Specialty>)
+
+    suspend fun fetchSpecialties(): List<Specialty>
 }

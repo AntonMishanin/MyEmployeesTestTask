@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "MyEmployeesTestTask"
 include ':app'
 include ':common:employees-data'
+include ':core'
+include ':feature:specialties'
+include ':common:employees-domain'

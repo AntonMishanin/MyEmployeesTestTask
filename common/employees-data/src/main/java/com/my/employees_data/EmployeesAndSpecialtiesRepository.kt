@@ -74,4 +74,6 @@ class EmployeesAndSpecialtiesRepository(
     override suspend fun saveSpecialties(data: List<Specialty>) {
         specialtiesMemoryCache.replace(data)
     }
+
+    override suspend fun fetchSpecialties() = specialtiesMemoryCache.flow().value
 }
