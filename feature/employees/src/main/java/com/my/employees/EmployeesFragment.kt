@@ -34,12 +34,12 @@ class EmployeesFragment(
                 .commit()
         }
 
-        val adapter = EmployeesAdapter {
+        val viewModel by viewModels<EmployeesViewModel> { employeesViewModelFactory }
+        val adapter = EmployeesAdapter({
             (requireActivity() as? EmployeesNavigation)?.toEmployeeDetails(it.id)
-        }
+        }, onRefreshClicked = viewModel::refreshEmployees)
         binding.list.adapter = adapter
 
-        val viewModel by viewModels<EmployeesViewModel> { employeesViewModelFactory }
         viewModel.state.onEach(adapter::submitList).launchIn(lifecycleScope)
     }
 }

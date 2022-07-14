@@ -1,7 +1,6 @@
 package com.my.employees_data
 
 import com.my.employees_data.database.employees.EmployeeDbo
-import com.my.employees_data.database.specialties.SpecialtyDbo
 import com.my.employees_data.network.EmployeeDto
 import com.my.employees_data.network.SpecialtyDto
 import com.my.employees_domain.Specialty
@@ -46,23 +45,23 @@ class EmployeesConverter {
     }
 
     fun toDomain(input: List<EmployeeDbo>, specialties: List<Specialty>): List<Employee> {
-        val specialtiesMap = specialties.associateBy({ it.id }, { it })
+        val specialtiesMap = specialties.associateBy({ it.id.toString() }, { it })
         val result = mutableListOf<Employee>()
         input.forEach {
-            val employee = toDomain(it, specialtiesMap)
+            val employee = domainEmployee(it, specialtiesMap)
             result.add(employee)
         }
         return result
     }
 
     // TODO think about specialties logic
-    fun toDomain(input: EmployeeDbo, specialties: Map<Int, Specialty>) = Employee(
+    private fun domainEmployee(input: EmployeeDbo, specialties: Map<String, Specialty>) = Employee(
         id = input.id,
         firstName = input.firstName,
         lastName = input.lastName,
         birthday = input.birthday,
         avatarUrl = input.avatarUrl,
-        specialties = emptyList()//input.specialties.split(DELIMITERS).map { specialties[it.toInt()]!! }
+        specialties = input.specialties.split(DELIMITERS).mapNotNull(specialties::get)
     )
 
     private companion object {

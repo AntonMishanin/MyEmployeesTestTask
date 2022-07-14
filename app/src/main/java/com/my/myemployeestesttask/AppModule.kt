@@ -33,6 +33,7 @@ class AppModule {
     @[Provides AppScope]
     internal fun provideBuildConfigWrapper() = object : BuildConfigWrapper {
 
+        // TODO: move to BuildConfig
         override fun baseUrl() = "https://gitlab.65apps.com/"
 
         override fun isDebug() = BuildConfig.DEBUG

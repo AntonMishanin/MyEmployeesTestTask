@@ -21,7 +21,7 @@ class EmployeesViewModel(
     private val converter: EmployeeUiConverter
 ) : ViewModel() {
 
-    private val innerState = MutableStateFlow<List<EmployeeUi>>(emptyList())
+    private val innerState = MutableStateFlow<List<EmployeeUi>>(converter.progress())
     val state: StateFlow<List<EmployeeUi>> = innerState
 
     init {
@@ -29,14 +29,14 @@ class EmployeesViewModel(
             refreshEmployeesUseCase.invoke()
 
             observeEmployeesUseCase.invoke().map(converter::convert).collect {
-                println("$it !!!!!!!!!!!!!!")
-                innerState.value = it
+                innerState.emit(it.toList())
             }
         }
     }
 
     fun refreshEmployees() {
         viewModelScope.launch(dispatchers.main()) {
+            innerState.emit(converter.progress())
             refreshEmployeesUseCase.invoke()
         }
     }

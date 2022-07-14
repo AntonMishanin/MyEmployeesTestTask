@@ -19,6 +19,9 @@
 
 Estimation: 21h /Real: 24h
 
+ + Extra tasks:
+0014. Progress and error state - 2h
+
 ### MVI research results:
 1. [MVI Core Badoo](https://github.com/badoo/MVICore) need's a little but more time
 2. [MVI Kotlin](https://github.com/arkivanov/MVIKotlin) look's more easy

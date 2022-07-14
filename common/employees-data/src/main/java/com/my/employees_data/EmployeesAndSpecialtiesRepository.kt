@@ -21,19 +21,18 @@ class EmployeesAndSpecialtiesRepository(
     private val employeesConverter: EmployeesConverter,
     private val specialtiesDao: SpecialtiesDao,
     private val specialtiesConverter: SpecialtiesConverter,
-    private val employeesMemoryCache: EmployeesMemoryCache,
     private val specialtiesMemoryCache: SpecialtiesMemoryCache,
-    private val dispatchers: DispatchersWrapper
+    private val dispatchers: DispatchersWrapper,
+    private val employeesResultMemoryCache: EmployeesResultMemoryCache
 ) : EmployeesRepository, SpecialtiesRepository {
 
-    override suspend fun observeEmployees() = employeesMemoryCache.flow()
+    override suspend fun observeFilterParams() = employeesResultMemoryCache.flow()
 
     override suspend fun refreshEmployees() = withContext(dispatchers.io()) {
         try {
             fetchFromNetworkAndSaveToStorage()
-            println("SUCCESS !!!!!!!!!!!!!!")
         } catch (exception: Exception) {
-            println("$exception !!!!!!!!!!!!!!")
+            exception.printStackTrace()
             fetchFromStorage(exception)
         }
     }
@@ -48,7 +47,7 @@ class EmployeesAndSpecialtiesRepository(
         specialtiesDao.save(specialtiesDbo)
 
         val employeesDomain = employeesConverter.toDomain(pair.first, specialtiesDomain)
-        employeesMemoryCache.replace(employeesDomain)
+        employeesResultMemoryCache.employees(employeesDomain)
         employeesDao.save(pair.first)
     }
 
@@ -57,23 +56,25 @@ class EmployeesAndSpecialtiesRepository(
         val specialtiesDbo = specialtiesDao.read()
 
         if (employeesDbo.isEmpty() && specialtiesDbo.isEmpty()) {
-            throw exception
+            employeesResultMemoryCache.sendException(exception)
+            return
         }
 
         val specialtiesDomain = specialtiesConverter.toDomain(specialtiesDbo)
         specialtiesMemoryCache.replace(specialtiesDomain)
 
         val employeesDomain = employeesConverter.toDomain(employeesDbo, specialtiesDomain)
-        employeesMemoryCache.replace(employeesDomain)
+        employeesResultMemoryCache.employees(employeesDomain)
     }
 
     override suspend fun fetchEmployee(id: String): Employee =
-        employeesMemoryCache.flow().value.find { it.id == id }
+        employeesResultMemoryCache.fetchEmployees().find { it.id == id }
             ?: throw IllegalArgumentException("Unknown id $id")
 
     override suspend fun observeSpecialties() = specialtiesMemoryCache.flow()
 
     override suspend fun saveSpecialties(data: List<Specialty>) {
+        employeesResultMemoryCache.replace(data)
         specialtiesMemoryCache.replace(data)
     }
 
