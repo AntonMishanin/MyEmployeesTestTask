@@ -2,7 +2,10 @@ package com.my.myemployeestesttask
 
 import android.app.Application
 import com.my.core.AppScope
+import com.my.employees.di.EmployeesFragmentFactory
+import com.my.employees.di.EmployeesModule
 import com.my.employees_data.EmployeesDataModule
+import com.my.employees_domain.employees.EmployeesDomainModule
 import com.my.employees_domain.specialties.SpecialtiesDomainModule
 import com.my.specialties.di.SpecialtiesFragmentFactory
 import com.my.specialties.di.SpecialtiesModule
@@ -11,11 +14,11 @@ import dagger.Component
 
 @[AppScope Component(
     modules = [EmployeesDataModule::class, SpecialtiesModule::class,
-        SpecialtiesDomainModule::class, AppModule::class]
+        SpecialtiesDomainModule::class, AppModule::class, EmployeesModule::class, EmployeesDomainModule::class]
 )]
 internal interface AppComponent {
 
-    fun provideSpecialtiesFragmentFactory(): SpecialtiesFragmentFactory
+    fun provideEmployeesFragmentFactory(): EmployeesFragmentFactory
 
     @Component.Builder
     interface Builder {

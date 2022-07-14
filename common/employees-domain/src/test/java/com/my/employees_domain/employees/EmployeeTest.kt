@@ -10,11 +10,11 @@ import org.junit.Test
 internal class EmployeeTest {
 
     @Test
-    fun `test the birthday is empty should be empty`() {
+    fun `test the birthday is empty should return placeholder`() {
         val employee = employee(birthDay = "")
 
         val actual = employee.copyWithCorrectBirthday().birthday
-        val expected = ""
+        val expected = "««"
         Assert.assertEquals(expected, actual)
     }
 
@@ -55,13 +55,13 @@ internal class EmployeeTest {
     }
 
     @Test
-    fun `test the wrong birthday should return himself`() {
+    fun `test the wrong birthday should return placeholder`() {
         var actual = employee(birthDay = "2t-03-1987").copyWithCorrectBirthday().birthday
-        var expected = "2t-03-1987"
+        var expected = "««"
         Assert.assertEquals(expected, actual)
 
         actual = employee(birthDay = "21-03-558y").copyWithCorrectBirthday().birthday
-        expected = "21-03-558y"
+        expected = "««"
         Assert.assertEquals(expected, actual)
     }
 
