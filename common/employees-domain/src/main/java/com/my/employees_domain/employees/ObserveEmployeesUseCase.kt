@@ -14,15 +14,18 @@ class ObserveEmployeesUseCase(
 
     suspend fun invoke() = employeesRepository
         .observeFilterParams()
-        .map { pair ->
-            val employees = pair.second
-            if (pair.first.specialtiesId.isEmpty()) {
-                employees
+        .map { result ->
+            if (result.filterParams.specialtiesId.isEmpty()) {
+                result
             } else {
-                matchEmployeeWithFilterParams(pair.first, employees)
+                val employees = matchEmployeeWithFilterParams(result.filterParams, result.employees)
+                result.copy(employees = employees)
             }
         }
-        .map { it.copyWithCorrectInformation() }
+        .map {
+            val employee = it.employees.copyWithCorrectInformation()
+            it.copy(employees = employee)
+        }
 
     private fun matchEmployeeWithFilterParams(
         filterParams: FilterParams,

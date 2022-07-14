@@ -27,17 +27,15 @@ class EmployeesDataModule {
         employeesConverter: EmployeesConverter,
         specialtiesDao: SpecialtiesDao,
         specialtiesConverter: SpecialtiesConverter,
-        employeesMemoryCache: EmployeesMemoryCache,
         specialtiesMemoryCache: SpecialtiesMemoryCache,
         dispatchers: DispatchersWrapper,
-        filterParamsMemoryCache: FilterParamsMemoryCache
+        filterParamsMemoryCache: EmployeesResultMemoryCache
     ) = EmployeesAndSpecialtiesRepository(
         remoteDataSource,
         employeesDao,
         employeesConverter,
         specialtiesDao,
         specialtiesConverter,
-        employeesMemoryCache,
         specialtiesMemoryCache,
         dispatchers,
         filterParamsMemoryCache
@@ -50,13 +48,10 @@ class EmployeesDataModule {
     fun provideSpecialtiesConverter() = SpecialtiesConverter()
 
     @Provides
-    fun provideEmployeesMemoryCache() = EmployeesMemoryCache()
-
-    @Provides
     fun provideSpecialtiesMemoryCache() = SpecialtiesMemoryCache()
 
     @Provides
-    fun provideFilterParamsMemoryCache() = FilterParamsMemoryCache()
+    fun provideFilterParamsMemoryCache() = EmployeesResultMemoryCache()
 }
 
 @Module
