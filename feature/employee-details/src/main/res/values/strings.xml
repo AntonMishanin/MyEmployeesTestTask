@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO: think about the same resources in feature:employees module-->
+    <string name="name">Имя:</string>
+    <string name="surname">Фамилия:</string>
+    <string name="birthday">Дата рождения:</string>
+    <string name="age">Возраст:</string>
+    <string name="specialty">Специальность:</string>
+
+    <string name="back">Назад</string>
+</resources>

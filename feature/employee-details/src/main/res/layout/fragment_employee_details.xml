@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back" />
+
+    <LinearLayout
+        android:id="@+id/name_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/surname_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/surname"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/surname_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Surname" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/birthday_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/birthday"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/birthday_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Birthday" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/age_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/age"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/age_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Age" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/specialty_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/specialty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/specialty"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/specialty_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Specialty" />
+    </LinearLayout>
+
+</LinearLayout>

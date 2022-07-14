@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "MyEmployeesTestTask"
+include ':app'
+include ':common:employees-data'
+include ':core'
+include ':feature:specialties'
+include ':common:employees-domain'
+include ':feature:employees'
+include ':feature:employee-details'
