@@ -11,9 +11,9 @@
 0007. Fetch specialties, employees, employee use cases (1h/1h) + tests
 0008. Handle date logic (1h/30m)
 0009. Handle date test (1h/30m)
-0010. Handle name and surname logic (1h/)
-0011. Handle name and surname test (1h/)
-0012. UI specialties (2h/)
+0010. Handle name and surname logic (1h/30m)
+0011. Handle name and surname test (1h/30m)
+0012. UI specialties (2h/3h)
 0013. UI employees (2h/)
 0014. UI employees details (2h/)
 
