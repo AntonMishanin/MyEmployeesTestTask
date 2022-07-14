@@ -28,3 +28,14 @@ Estimation: 21h /Real: 24h
 
 ### UML diagram
 <img src="./EmployeesUMLDiagram.svg">
+
+### Screenshots
+<img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/develop/screenshots/photo_2022-07-14_18-35-06.jpg" width="256"/> <img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/develop/screenshots/photo_2022-07-14_18-30-10.jpg" width="256"/> <img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/develop/screenshots/photo_2022-07-14_18-33-25.jpg" width="256"/> <img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/develop/screenshots/photo_2022-07-14_18-33-40.jpg" width="256"/>
+
+### TODO:
+1. Pagination
+2. CI
+3. Interesting UI
+4. Save state to bundle
+5. Fetch url from BuildSrc
+6. Check internal modificator
