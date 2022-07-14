@@ -14,7 +14,7 @@
 0010. Handle name and surname logic (1h/30m)
 0011. Handle name and surname test (1h/30m)
 0012. UI specialties (2h/3h)
-0013. UI employees (2h/)
+0013. UI employees (2h/3h)
 0014. UI employees details (2h/)
 
 Estimation: 21h /Real:
