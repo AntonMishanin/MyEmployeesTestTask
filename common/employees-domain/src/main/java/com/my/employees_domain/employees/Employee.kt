@@ -88,8 +88,8 @@ data class Employee(
             var years = currentYear - input.third.toInt()
             val months = currentMonth - input.second.toInt()
             val days = currentDayOfMonth - input.first.toInt()
-            if (months >= 0 && days >= 0) {
-                years += 1
+            if (months < 0 || days < 0) {
+                years -= 1
             }
             years.toString()
         } catch (e: NumberFormatException) {

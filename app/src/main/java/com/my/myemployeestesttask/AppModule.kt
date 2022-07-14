@@ -4,6 +4,9 @@ import android.app.Application
 import com.my.core.AppScope
 import com.my.core.BuildConfigWrapper
 import com.my.core.DispatchersWrapper
+import com.my.employee_details.EmployeeDetailsFragment
+import com.my.employees.EmployeesFragment
+import com.my.specialties.SpecialtiesFragment
 import dagger.Module
 import dagger.Provides
 
@@ -13,6 +16,13 @@ import dagger.Provides
  */
 @Module
 class AppModule {
+
+    @Provides
+    internal fun provideMainFragmentFactory(
+        employeesFragment: EmployeesFragment,
+        employeeDetailsFragment: EmployeeDetailsFragment,
+        specialtiesFragment: SpecialtiesFragment
+    ) = MainFragmentFactory(employeesFragment, employeeDetailsFragment, specialtiesFragment)
 
     @[Provides AppScope]
     internal fun provideContext(application: Application) = application.applicationContext
