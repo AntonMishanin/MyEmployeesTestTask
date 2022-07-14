@@ -2,6 +2,7 @@ package com.my.employees_domain.employees
 
 import com.my.employees_domain.Specialty
 import java.lang.NumberFormatException
+import java.util.*
 import kotlin.text.StringBuilder
 
 /**
@@ -14,21 +15,35 @@ data class Employee(
     val lastName: String,
     val birthday: String,
     val avatarUrl: String,
-    val specialties: List<Specialty>
+    val specialties: List<Specialty>,
+    val age: String = EMPTY_AGE
 ) {
 
     fun copyWithCorrectInformation(): Employee {
         val firstName = startWithUpperCase(this.firstName)
         val lastName = startWithUpperCase(this.lastName)
-        val birthday = correctDate(this.birthday)
+        var birthday: String
+        var age: String
+        try {
+            val splitDate = splitDate(this.birthday)
+            birthday = correctDate(splitDate)
+            age = age(splitDate)
+        } catch (e: NumberFormatException) {
+            birthday = EMPTY_BIRTHDAY
+            age = EMPTY_AGE
+        } catch (e: IllegalArgumentException) {
+            birthday = EMPTY_BIRTHDAY
+            age = EMPTY_AGE
+        }
         return if (
             this.firstName == firstName &&
             this.lastName == lastName &&
-            this.birthday == birthday
+            this.birthday == birthday &&
+            this.age == age
         ) {
             this
         } else {
-            copy(firstName = firstName, lastName = lastName, birthday = birthday)
+            copy(firstName = firstName, lastName = lastName, birthday = birthday, age = age)
         }
     }
 
@@ -48,11 +63,11 @@ data class Employee(
 
     fun copyWithCorrectBirthday(): Employee {
         val newBirthday = try {
-            correctDate(birthday)
+            correctDate(splitDate(birthday))
         } catch (e: NumberFormatException) {
-            birthday
+            EMPTY_BIRTHDAY
         } catch (e: IllegalArgumentException) {
-            birthday
+            EMPTY_BIRTHDAY
         }
         return when (newBirthday == birthday) {
             true -> this
@@ -60,16 +75,39 @@ data class Employee(
         }
     }
 
-    private fun correctDate(input: String): String {
+    private fun correctDate(input: Triple<String, String, String>) =
+        "${input.first}.${input.second}.${input.third}"
+
+    private fun age(input: Triple<String, String, String>): String {
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        val currentMonth =
+            Calendar.getInstance().get(Calendar.MONTH) + 1//+1 because months became from 0
+        val currentDayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+
+        return try {
+            var years = currentYear - input.third.toInt()
+            val months = currentMonth - input.second.toInt()
+            val days = currentDayOfMonth - input.first.toInt()
+            if (months >= 0 && days >= 0) {
+                years += 1
+            }
+            years.toString()
+        } catch (e: NumberFormatException) {
+            e.printStackTrace()
+            EMPTY_AGE
+        }
+    }
+
+    private fun splitDate(input: String): Triple<String, String, String> {
         val digits = digitsFromString(input)
-        if (digits.size != 3) return input
+        if (digits.size != 3) throw IllegalArgumentException("Unknown date")
 
         return if (digits[0].length == DIGITS_PER_YEAR) {
-            combineDate(digits[1], digits[2], year = digits[0])
+            detectDayMonthYear(digits[1], digits[2], year = digits[0])
         } else if (digits[1].length == DIGITS_PER_YEAR) {
-            combineDate(digits[0], digits[2], year = digits[1])
+            detectDayMonthYear(digits[0], digits[2], year = digits[1])
         } else if (digits[2].length == DIGITS_PER_YEAR) {
-            combineDate(digits[0], digits[1], year = digits[2])
+            detectDayMonthYear(digits[0], digits[1], year = digits[2])
         } else {
             // Wrong birthday here
             throw IllegalArgumentException("Unknown date")
@@ -92,16 +130,20 @@ data class Employee(
         return result.map { it.toString() }
     }
 
-    private fun combineDate(first: String, second: String, year: String): String {
+    private fun detectDayMonthYear(
+        first: String,
+        second: String,
+        year: String
+    ): Triple<String, String, String> {
         val firstInt = first.toInt()
         val secondInt = second.toInt()
-
+        Triple(second, first, year)
         return if (firstInt <= MONTHS_PER_YEAR && secondInt <= MONTHS_PER_YEAR) {
-            "$second.$first.$year"
+            Triple(second, first, year)
         } else if (firstInt <= MONTHS_PER_YEAR && secondInt > MONTHS_PER_YEAR) {
-            "$second.$first.$year"
+            Triple(second, first, year)
         } else if (firstInt > MONTHS_PER_YEAR && secondInt <= MONTHS_PER_YEAR) {
-            "$first.$second.$year"
+            Triple(first, second, year)
         } else {
             // Wrong date
             throw IllegalArgumentException("Unknown date")
@@ -111,6 +153,8 @@ data class Employee(
     internal companion object {
         private const val DIGITS_PER_YEAR = 4
         private const val MONTHS_PER_YEAR = 12
+        private const val EMPTY_AGE = "««"
+        private const val EMPTY_BIRTHDAY= "««"
 
         fun List<Employee>.copyWithCorrectInformation() =
             this.map { it.copyWithCorrectInformation() }

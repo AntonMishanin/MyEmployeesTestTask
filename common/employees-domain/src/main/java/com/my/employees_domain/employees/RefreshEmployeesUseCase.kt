@@ -8,5 +8,7 @@ class RefreshEmployeesUseCase(
     private val employeesRepository: EmployeesRepository
 ) {
 
-    suspend fun invoke() = employeesRepository.refreshEmployees()
+    suspend fun invoke(){
+        employeesRepository.refreshEmployees()
+    }
 }
