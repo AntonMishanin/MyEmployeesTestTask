@@ -28,7 +28,7 @@ class SpecialtiesViewModel(
     init {
         viewModelScope.launch(dispatchers.main()) {
             observeSpecialtiesUseCase.invoke().collect {
-                innerState.emit(it)
+                innerState.value = it
             }
         }
     }

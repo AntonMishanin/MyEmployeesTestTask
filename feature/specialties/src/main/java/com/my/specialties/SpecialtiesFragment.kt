@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import com.my.core.ViewBindingFragment
 import com.my.specialties.databinding.FragmentSpecialtiesBinding
 import com.my.specialties.di.SpecialtiesViewModelFactory
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -21,11 +20,10 @@ class SpecialtiesFragment(
     FragmentSpecialtiesBinding::inflate
 ) {
 
-    private val viewModel by viewModels<SpecialtiesViewModel> { specialtiesViewModelFactory }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel by viewModels<SpecialtiesViewModel> { specialtiesViewModelFactory }
         binding.reset.setOnClickListener {
             viewModel.onResetClicked()
         }
