@@ -27,6 +27,7 @@ dependencies {
     implementation project(':core')
     implementation project(':feature:specialties')
     implementation project(':feature:employees')
+    implementation project(':feature:employee-details')
     implementation project(':common:employees-data')
     implementation project(':common:employees-domain')
 
