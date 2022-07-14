@@ -2,12 +2,13 @@ package com.my.myemployeestesttask
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.my.employees.EmployeesNavigation
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), EmployeesNavigation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val fragmentFactory = (application as AppComponentProvider)
-            .provide().provideSpecialtiesFragmentFactory()
+            .provide().provideEmployeesFragmentFactory()
         supportFragmentManager.fragmentFactory = fragmentFactory
 
         super.onCreate(savedInstanceState)
@@ -16,8 +17,10 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.content, fragmentFactory.specialtiesFragment())
+                .add(R.id.content, fragmentFactory.employeesFragment())
                 .commit()
         }
     }
+
+    override fun toEmployeeDetails(id: String) = Unit
 }

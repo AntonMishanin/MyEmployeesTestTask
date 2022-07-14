@@ -31,7 +31,9 @@ class EmployeesAndSpecialtiesRepository(
     override suspend fun refreshEmployees() = withContext(dispatchers.io()) {
         try {
             fetchFromNetworkAndSaveToStorage()
+            println("SUCCESS !!!!!!!!!!!!!!")
         } catch (exception: Exception) {
+            println("$exception !!!!!!!!!!!!!!")
             fetchFromStorage(exception)
         }
     }

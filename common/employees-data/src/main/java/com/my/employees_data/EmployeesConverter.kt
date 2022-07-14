@@ -62,7 +62,7 @@ class EmployeesConverter {
         lastName = input.lastName,
         birthday = input.birthday,
         avatarUrl = input.avatarUrl,
-        specialties = input.specialties.split(DELIMITERS).map { specialties[it.toInt()]!! }
+        specialties = emptyList()//input.specialties.split(DELIMITERS).map { specialties[it.toInt()]!! }
     )
 
     private companion object {
