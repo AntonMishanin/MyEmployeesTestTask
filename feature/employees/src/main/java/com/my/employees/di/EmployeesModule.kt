@@ -17,8 +17,10 @@ import dagger.Provides
 class EmployeesModule {
 
     @Provides
-    fun provideEmployeesFragmentFactory(specialtiesFragment: EmployeesFragment) =
-        EmployeesFragmentFactory(specialtiesFragment)
+    fun provideEmployeesFragmentFactory(
+        specialtiesFragment: EmployeesFragment,
+        specialtiesFragmentFactory: SpecialtiesFragmentFactory
+    ) = EmployeesFragmentFactory(specialtiesFragment, specialtiesFragmentFactory)
 
     @Provides
     fun provideEmployeesFragment(
