@@ -1,5 +1,6 @@
 package com.my.employees_domain.employees
 
+import com.my.employees_domain.FilterParams
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -8,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
  */
 interface EmployeesRepository {
 
-    suspend fun observeEmployees(): Flow<List<Employee>>
+    suspend fun observeFilterParams(): Flow<Pair<FilterParams, List<Employee>>>
 
     suspend fun refreshEmployees()
 

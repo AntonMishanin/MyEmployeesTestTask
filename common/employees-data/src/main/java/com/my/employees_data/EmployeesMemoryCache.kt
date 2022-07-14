@@ -1,5 +1,6 @@
 package com.my.employees_data
 
+import com.my.employees_domain.FilterParams
 import com.my.employees_domain.Specialty
 import com.my.employees_domain.employees.Employee
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,6 +40,23 @@ class SpecialtiesMemoryCache(
         result.addAll(flow.value)
         result.addAll(data)
         flow.emit(result)
+    }
+
+    fun flow() = flow
+}
+
+class FilterParamsMemoryCache(
+    private val flow: MutableStateFlow<FilterParams> = MutableStateFlow(FilterParams())
+) {
+
+    suspend fun replace(data: List<Specialty>) {
+        val set = HashSet<String>()
+        data.forEach { specialty ->
+            if(specialty.isActive){
+                set.add(specialty.id.toString())
+            }
+        }
+        flow.emit(FilterParams(specialtiesId = set))
     }
 
     fun flow() = flow

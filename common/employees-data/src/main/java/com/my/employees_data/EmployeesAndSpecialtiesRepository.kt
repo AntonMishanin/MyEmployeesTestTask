@@ -8,6 +8,7 @@ import com.my.employees_domain.employees.EmployeesRepository
 import com.my.employees_domain.specialties.SpecialtiesRepository
 import com.my.employees_domain.Specialty
 import com.my.employees_domain.employees.Employee
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
@@ -23,17 +24,18 @@ class EmployeesAndSpecialtiesRepository(
     private val specialtiesConverter: SpecialtiesConverter,
     private val employeesMemoryCache: EmployeesMemoryCache,
     private val specialtiesMemoryCache: SpecialtiesMemoryCache,
-    private val dispatchers: DispatchersWrapper
+    private val dispatchers: DispatchersWrapper,
+    private val filterParamsMemoryCache: FilterParamsMemoryCache
 ) : EmployeesRepository, SpecialtiesRepository {
 
-    override suspend fun observeEmployees() = employeesMemoryCache.flow()
+    override suspend fun observeFilterParams() =
+        filterParamsMemoryCache.flow().map { Pair(it, employeesMemoryCache.flow().value) }
 
     override suspend fun refreshEmployees() = withContext(dispatchers.io()) {
         try {
             fetchFromNetworkAndSaveToStorage()
-            println("SUCCESS !!!!!!!!!!!!!!")
         } catch (exception: Exception) {
-            println("$exception !!!!!!!!!!!!!!")
+            exception.printStackTrace()
             fetchFromStorage(exception)
         }
     }
@@ -74,6 +76,7 @@ class EmployeesAndSpecialtiesRepository(
     override suspend fun observeSpecialties() = specialtiesMemoryCache.flow()
 
     override suspend fun saveSpecialties(data: List<Specialty>) {
+        filterParamsMemoryCache.replace(data)
         specialtiesMemoryCache.replace(data)
     }
 

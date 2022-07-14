@@ -29,8 +29,7 @@ class EmployeesViewModel(
             refreshEmployeesUseCase.invoke()
 
             observeEmployeesUseCase.invoke().map(converter::convert).collect {
-                println("$it !!!!!!!!!!!!!!")
-                innerState.value = it
+                innerState.emit(it.toList())
             }
         }
     }
