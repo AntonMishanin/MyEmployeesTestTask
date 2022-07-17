@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.my.core.DispatchersWrapper
 import com.my.employee_details.EmployeeDetailsConverter
 import com.my.employee_details.EmployeeDetailsViewModel
-import com.my.employees_domain.employees.FetchEmployeeUseCase
+import com.my.employee_details.domain.FetchEmployeeUseCase
 
 class EmployeeDetailsViewModelFactory(
     private val fetchEmployeeUseCase: FetchEmployeeUseCase,

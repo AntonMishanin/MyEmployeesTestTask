@@ -3,7 +3,7 @@ package com.my.employee_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.my.core.DispatchersWrapper
-import com.my.employees_domain.employees.FetchEmployeeUseCase
+import com.my.employee_details.domain.FetchEmployeeUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

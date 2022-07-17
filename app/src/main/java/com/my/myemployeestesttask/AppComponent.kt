@@ -3,20 +3,21 @@ package com.my.myemployeestesttask
 import android.app.Application
 import com.my.core.AppScope
 import com.my.employee_details.di.EmployeeDetailsModule
-import com.my.employees.di.EmployeesFragmentFactory
 import com.my.employees.di.EmployeesModule
-import com.my.employees_data.EmployeesDataModule
-import com.my.employees_domain.employees.EmployeesDomainModule
-import com.my.employees_domain.specialties.SpecialtiesDomainModule
-import com.my.specialties.di.SpecialtiesFragmentFactory
+import com.my.employees.di.DataModule
+import com.my.employees_data.EmployeesStorageModule
+import com.my.specialties.di.DomainModule
+import com.my.employees_root.di.EmployeesRootModule
+import com.my.employees_root.data.NetworkModule
 import com.my.specialties.di.SpecialtiesModule
 import dagger.BindsInstance
 import dagger.Component
 
 @[AppScope Component(
-    modules = [EmployeesDataModule::class, SpecialtiesModule::class,
-        SpecialtiesDomainModule::class, AppModule::class, EmployeesModule::class, EmployeesDomainModule::class,
-        EmployeeDetailsModule::class]
+    modules = [DataModule::class, DomainModule::class, SpecialtiesModule::class,
+        EmployeesModule::class, AppModule::class, DomainModule::class,
+        EmployeeDetailsModule::class, EmployeesRootModule::class, NetworkModule::class,
+        EmployeesStorageModule::class]
 )]
 internal interface AppComponent {
 

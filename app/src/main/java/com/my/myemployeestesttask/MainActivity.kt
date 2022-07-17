@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.my.employee_details.EmployeeDetailsFragment
-import com.my.employees.EmployeesFragment
-import com.my.employees.EmployeesNavigation
-import com.my.specialties.SpecialtiesFragment
+import com.my.employees.presentation.EmployeesNavigation
+import com.my.employees_root.presentation.EmployeesRootFragment
 
+// TODO: think about navigation
 class MainActivity : AppCompatActivity(), EmployeesNavigation {
 
     private val fragmentFactory by lazy {
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), EmployeesNavigation {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.content, fragmentFactory.employeesFragment())
+                .add(R.id.content, fragmentFactory.employeesRootFragment())
                 .commit()
         }
     }
@@ -38,21 +38,18 @@ class MainActivity : AppCompatActivity(), EmployeesNavigation {
 }
 
 class MainFragmentFactory(
-    private val employeesFragment: EmployeesFragment,
-    private val employeeDetailsFragment: EmployeeDetailsFragment,
-    private val specialtiesFragment: SpecialtiesFragment
+    private val employeesRootFragment: EmployeesRootFragment,
+    private val employeeDetailsFragment: EmployeeDetailsFragment
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment =
         when (loadFragmentClass(classLoader, className)) {
-            EmployeesFragment::class.java -> employeesFragment()
+            EmployeesRootFragment::class.java -> employeesRootFragment()
             EmployeeDetailsFragment::class.java -> employeeDetailsFragment()
-            SpecialtiesFragment::class.java -> specialtiesFragment
             else -> super.instantiate(classLoader, className)
         }
 
-    fun employeesFragment() = employeesFragment
+    fun employeesRootFragment() = employeesRootFragment
 
     fun employeeDetailsFragment() = employeeDetailsFragment
-
 }

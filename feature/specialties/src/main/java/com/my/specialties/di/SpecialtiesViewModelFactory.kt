@@ -3,10 +3,10 @@ package com.my.specialties.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.my.core.DispatchersWrapper
-import com.my.employees_domain.specialties.ChooseSpecialtyUseCase
-import com.my.employees_domain.specialties.ObserveSpecialtiesUseCase
-import com.my.employees_domain.specialties.ResetSpecialtyUseCase
-import com.my.specialties.SpecialtiesViewModel
+import com.my.specialties.domain.ChooseSpecialtyUseCase
+import com.my.specialties.domain.ObserveSpecialtiesUseCase
+import com.my.specialties.domain.ResetSpecialtyUseCase
+import com.my.specialties.presentation.SpecialtiesViewModel
 
 class SpecialtiesViewModelFactory(
     private val chooseSpecialtyUseCase: ChooseSpecialtyUseCase,
