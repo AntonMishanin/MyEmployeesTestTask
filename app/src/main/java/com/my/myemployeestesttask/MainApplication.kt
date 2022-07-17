@@ -1,19 +1,40 @@
 package com.my.myemployeestesttask
 
 import android.app.Application
+import com.my.core.Component
+import java.lang.IllegalArgumentException
 
 /**
  * @Author: Anton Mishanin
  * @Date: 7/13/2022
  */
-internal class MainApplication : Application(), AppComponentProvider {
+internal class MainApplication : Application(), Component.Provide, Component.Clear {
 
-    private val appComponent: AppComponent by lazy {
-        DaggerAppComponent
-            .builder()
-            .application(application = this)
-            .build()
+    private val componentContainer = HashMap<String, Any>()
+
+    override fun <T : Any> provideComponent(clazz: Class<T>) =
+        when (clazz) {
+            AppComponent::class.java -> createIfNeededAndGet(clazz) {
+                AppComponent.Factory(application = this).create()
+            }
+            else -> throw IllegalArgumentException("Unknown class $clazz")
+        } as T
+
+    override fun <T : Any> clearComponent(clazz: Class<T>) {
+        val key = clazz.canonicalName ?: ""
+        componentContainer.remove(key)
     }
 
-    override fun provide() = appComponent
+    // TODO: think about this common logic here
+    private fun <T : Any> createIfNeededAndGet(clazz: Class<T>, createComponent: () -> T): T {
+        val key = clazz.canonicalName ?: ""
+        val component = componentContainer[key]
+        return if (component == null) {
+            val newComponent = createComponent.invoke()
+            componentContainer[key] = newComponent
+            newComponent
+        } else {
+            component
+        } as T
+    }
 }

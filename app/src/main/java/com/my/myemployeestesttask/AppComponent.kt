@@ -31,4 +31,14 @@ internal interface AppComponent {
 
         fun build(): AppComponent
     }
+
+    class Factory(
+        private val application: Application
+    ) : com.my.core.Component.Factory<AppComponent> {
+
+        override fun create(): AppComponent = DaggerAppComponent
+            .builder()
+            .application(application)
+            .build()
+    }
 }

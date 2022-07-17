@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
+import com.my.core.Component
 import com.my.employee_details.EmployeeDetailsFragment
 import com.my.employees.presentation.EmployeesNavigation
 import com.my.employees_root.presentation.EmployeesRootFragment
@@ -12,7 +13,9 @@ import com.my.employees_root.presentation.EmployeesRootFragment
 class MainActivity : AppCompatActivity(), EmployeesNavigation {
 
     private val fragmentFactory by lazy {
-        (application as AppComponentProvider).provide().provideMainFragmentFactory()
+        val provideComponent = (application as Component.Provide)
+        val appComponent = provideComponent.provideComponent(AppComponent::class.java)
+        appComponent.provideMainFragmentFactory()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
