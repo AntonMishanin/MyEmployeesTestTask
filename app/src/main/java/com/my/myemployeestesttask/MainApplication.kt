@@ -10,7 +10,7 @@ import java.lang.IllegalArgumentException
  */
 internal class MainApplication : Application(), Component.Provide, Component.Clear {
 
-    private val componentContainer = HashMap<String, Any>()
+    private val componentStore = HashMap<String, Any>()
 
     override fun <T : Any> provideComponent(clazz: Class<T>) =
         when (clazz) {
@@ -22,16 +22,16 @@ internal class MainApplication : Application(), Component.Provide, Component.Cle
 
     override fun <T : Any> clearComponent(clazz: Class<T>) {
         val key = clazz.canonicalName ?: ""
-        componentContainer.remove(key)
+        componentStore.remove(key)
     }
 
     // TODO: think about this common logic here
     private fun <T : Any> createIfNeededAndGet(clazz: Class<T>, createComponent: () -> T): T {
         val key = clazz.canonicalName ?: ""
-        val component = componentContainer[key]
+        val component = componentStore[key]
         return if (component == null) {
             val newComponent = createComponent.invoke()
-            componentContainer[key] = newComponent
+            componentStore[key] = newComponent
             newComponent
         } else {
             component
