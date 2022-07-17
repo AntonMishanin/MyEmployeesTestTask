@@ -1,8 +1,7 @@
 package com.my.employee_details
 
 import com.my.core.Converter
-import com.my.employees_domain.Specialty
-import com.my.employees_domain.employees.Employee
+import com.my.employees_data.Employee
 
 /**
  * @Author: Anton Mishanin
@@ -19,11 +18,11 @@ class EmployeeDetailsConverter : Converter<Employee, EmployeeDetails> {
         specialty = specialtiesToString(input.specialties)
     )
 
-    private fun specialtiesToString(input: List<Specialty>): String {
+    private fun specialtiesToString(input: List<String>): String {
         val result = StringBuilder()
 
         for (i in input.indices) {
-            val specialty = input[i].name
+            val specialty = input[i]
             val value = when (i == input.size - 1) {
                 true -> specialty
                 false -> "${specialty}, "

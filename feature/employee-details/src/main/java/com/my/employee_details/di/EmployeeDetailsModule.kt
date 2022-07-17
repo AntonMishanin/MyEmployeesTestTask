@@ -3,7 +3,11 @@ package com.my.employee_details.di
 import com.my.core.DispatchersWrapper
 import com.my.employee_details.EmployeeDetailsConverter
 import com.my.employee_details.EmployeeDetailsFragment
-import com.my.employees_domain.employees.FetchEmployeeUseCase
+import com.my.employee_details.data.EmployeeRepositoryImpl
+import com.my.employee_details.domain.EmployeeRepository
+import com.my.employee_details.domain.FetchEmployeeUseCase
+import com.my.employees_data.EmployeesConverter
+import com.my.employees_data.EmployeesStorage
 import dagger.Module
 import dagger.Provides
 
@@ -13,11 +17,6 @@ import dagger.Provides
  */
 @Module
 class EmployeeDetailsModule {
-
-    @Provides
-    fun provideEmployeeDetailsFragmentFactory(
-        employeeDetailsFragment: EmployeeDetailsFragment
-    ) = EmployeeDetailsFragmentFactory(employeeDetailsFragment)
 
     @Provides
     fun provideEmployeeDetailsFragment(
@@ -37,4 +36,15 @@ class EmployeeDetailsModule {
 
     @Provides
     fun provideEmployeeDetailsConverter() = EmployeeDetailsConverter()
+
+    @Provides
+    fun provideFetchEmployeeUseCase(
+        employeeRepository: EmployeeRepository
+    ) = FetchEmployeeUseCase(employeeRepository)
+
+    @Provides
+    fun provideEmployeeRepository(
+        employeesStorage: EmployeesStorage,
+        employeesConverter: EmployeesConverter
+    ): EmployeeRepository = EmployeeRepositoryImpl(employeesStorage, employeesConverter)
 }

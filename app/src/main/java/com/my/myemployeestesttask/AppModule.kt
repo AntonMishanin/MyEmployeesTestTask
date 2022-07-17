@@ -5,8 +5,7 @@ import com.my.core.AppScope
 import com.my.core.BuildConfigWrapper
 import com.my.core.DispatchersWrapper
 import com.my.employee_details.EmployeeDetailsFragment
-import com.my.employees.EmployeesFragment
-import com.my.specialties.SpecialtiesFragment
+import com.my.employees_root.presentation.EmployeesRootFragment
 import dagger.Module
 import dagger.Provides
 
@@ -19,10 +18,9 @@ class AppModule {
 
     @Provides
     internal fun provideMainFragmentFactory(
-        employeesFragment: EmployeesFragment,
-        employeeDetailsFragment: EmployeeDetailsFragment,
-        specialtiesFragment: SpecialtiesFragment
-    ) = MainFragmentFactory(employeesFragment, employeeDetailsFragment, specialtiesFragment)
+        employeesRootFragment: EmployeesRootFragment,
+        employeeDetailsFragment: EmployeeDetailsFragment
+    ) = MainFragmentFactory(employeesRootFragment, employeeDetailsFragment)
 
     @[Provides AppScope]
     internal fun provideContext(application: Application) = application.applicationContext
