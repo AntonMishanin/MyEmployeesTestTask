@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.my.core.ComponentStore
 import com.my.core.ViewBindingFragment
 import com.my.employee_details.databinding.FragmentEmployeeDetailsBinding
+import com.my.employee_details.di.EmployeeDetailsComponent
 import com.my.employee_details.di.EmployeeDetailsViewModelFactory
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -15,7 +17,8 @@ import kotlinx.coroutines.flow.onEach
  * @Date: 7/14/2022
  */
 class EmployeeDetailsFragment(
-    private val employeeDetailsViewModelFactory: EmployeeDetailsViewModelFactory
+    private val employeeDetailsViewModelFactory: EmployeeDetailsViewModelFactory,
+    private val componentStore: ComponentStore
 ) : ViewBindingFragment<FragmentEmployeeDetailsBinding>(
     FragmentEmployeeDetailsBinding::inflate
 ) {
@@ -42,5 +45,12 @@ class EmployeeDetailsFragment(
     fun setArguments(itemId: String): EmployeeDetailsFragment {
         employeeDetailsViewModelFactory.setArguments(itemId)
         return this
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (!requireActivity().isChangingConfigurations) {
+            componentStore.clear(EmployeeDetailsComponent::class.java)
+        }
     }
 }
