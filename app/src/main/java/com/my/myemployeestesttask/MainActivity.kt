@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.my.core.Component
+import com.my.core.ComponentStore
+import com.my.core.ProvideComponent
 import com.my.employee_details.EmployeeDetailsFragment
+import com.my.employee_details.di.EmployeeDetailsComponent
 import com.my.employees.presentation.EmployeesNavigation
 import com.my.employees_root.presentation.EmployeesRootFragment
 
@@ -13,8 +15,8 @@ import com.my.employees_root.presentation.EmployeesRootFragment
 class MainActivity : AppCompatActivity(), EmployeesNavigation {
 
     private val fragmentFactory by lazy {
-        val provideComponent = (application as Component.Provide)
-        val appComponent = provideComponent.provideComponent(AppComponent::class.java)
+        val provideComponent = (application as ProvideComponent)
+        val appComponent = provideComponent.provideComponent<AppComponent>()
         appComponent.provideMainFragmentFactory()
     }
 

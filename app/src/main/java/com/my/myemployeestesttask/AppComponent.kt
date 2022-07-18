@@ -2,7 +2,7 @@ package com.my.myemployeestesttask
 
 import android.app.Application
 import com.my.core.AppScope
-import com.my.employee_details.di.EmployeeDetailsModule
+import com.my.employee_details.di.EmployeeDetailsComponent
 import com.my.employees.di.EmployeesModule
 import com.my.employees.di.DataModule
 import com.my.employees_data.EmployeesStorageModule
@@ -15,13 +15,14 @@ import dagger.Component
 
 @[AppScope Component(
     modules = [DataModule::class, DomainModule::class, SpecialtiesModule::class,
-        EmployeesModule::class, AppModule::class, DomainModule::class,
-        EmployeeDetailsModule::class, EmployeesRootModule::class, NetworkModule::class,
-        EmployeesStorageModule::class]
+        EmployeesModule::class, AppModule::class, DomainModule::class, EmployeesRootModule::class,
+        NetworkModule::class, EmployeesStorageModule::class]
 )]
 internal interface AppComponent {
 
     fun provideMainFragmentFactory(): MainFragmentFactory
+
+    fun employeeDetailsComponent(): EmployeeDetailsComponent
 
     @Component.Builder
     interface Builder {
