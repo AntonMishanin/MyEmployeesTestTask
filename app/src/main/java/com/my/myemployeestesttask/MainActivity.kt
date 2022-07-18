@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.my.core.Component
+import com.my.core.ComponentStore
+import com.my.core.ProvideComponent
 import com.my.employee_details.EmployeeDetailsFragment
+import com.my.employee_details.di.EmployeeDetailsComponent
 import com.my.employees.presentation.EmployeesNavigation
 import com.my.employees_root.presentation.EmployeesRootFragment
 
@@ -13,8 +15,8 @@ import com.my.employees_root.presentation.EmployeesRootFragment
 class MainActivity : AppCompatActivity(), EmployeesNavigation {
 
     private val fragmentFactory by lazy {
-        val provideComponent = (application as Component.Provide)
-        val appComponent = provideComponent.provideComponent(AppComponent::class.java)
+        val provideComponent = (application as ProvideComponent)
+        val appComponent = provideComponent.provideComponent<AppComponent>()
         appComponent.provideMainFragmentFactory()
     }
 
@@ -42,7 +44,8 @@ class MainActivity : AppCompatActivity(), EmployeesNavigation {
 
 class MainFragmentFactory(
     private val employeesRootFragment: EmployeesRootFragment,
-    private val employeeDetailsFragment: EmployeeDetailsFragment
+    private val componentStore: ComponentStore,
+    private val provideComponent: ProvideComponent
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment =
@@ -54,5 +57,13 @@ class MainFragmentFactory(
 
     fun employeesRootFragment() = employeesRootFragment
 
-    fun employeeDetailsFragment() = employeeDetailsFragment
+    fun employeeDetailsFragment(): EmployeeDetailsFragment {
+        val clazz = EmployeeDetailsComponent::class.java
+        var component = componentStore.get(clazz)
+        if (component == null) {
+            component = provideComponent.provideComponent<AppComponent>().employeeDetailsComponent()
+            componentStore.add(component, clazz)
+        }
+        return component.fragment()
+    }
 }

@@ -18,6 +18,6 @@ interface Component {
 
     interface Clear {
 
-        fun <T : Any> clearComponent(clazz: Class<T>)
+        fun <T : Any> clear(clazz: Class<T>): Any?
     }
 }
