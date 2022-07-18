@@ -19,8 +19,18 @@ class AppModule {
     @Provides
     internal fun provideMainFragmentFactory(
         employeesRootFragment: EmployeesRootFragment,
-        employeeDetailsFragment: EmployeeDetailsFragment
-    ) = MainFragmentFactory(employeesRootFragment, employeeDetailsFragment)
+        componentStore: ComponentStore,
+        provideComponent: ProvideComponent
+    ) = MainFragmentFactory(
+        employeesRootFragment,
+        componentStore,
+        provideComponent
+    )
+
+    @[Provides AppScope]
+    internal fun provideComponentProvider(
+        application: Application
+    ): ProvideComponent = application as ProvideComponent
 
     @[Provides AppScope]
     internal fun provideContext(application: Application) = application.applicationContext

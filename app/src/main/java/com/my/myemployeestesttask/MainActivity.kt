@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity(), EmployeesNavigation {
 
 class MainFragmentFactory(
     private val employeesRootFragment: EmployeesRootFragment,
-    private val employeeDetailsFragment: EmployeeDetailsFragment
+    private val componentStore: ComponentStore,
+    private val provideComponent: ProvideComponent
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment =
@@ -54,5 +55,13 @@ class MainFragmentFactory(
 
     fun employeesRootFragment() = employeesRootFragment
 
-    fun employeeDetailsFragment() = employeeDetailsFragment
+    fun employeeDetailsFragment(): EmployeeDetailsFragment {
+        val clazz = EmployeeDetailsComponent::class.java
+        var component = componentStore.get(clazz)
+        if (component == null) {
+            component = provideComponent.provideComponent<AppComponent>().employeeDetailsComponent()
+            componentStore.add(component, clazz)
+        }
+        return component.fragment()
+    }
 }
