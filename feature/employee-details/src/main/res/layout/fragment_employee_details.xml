@@ -1,114 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:clipChildren="false">
 
-    <Button
-        android:id="@+id/back"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/name_value"
+        style="@style/EmployeeParams"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Name" />
 
-    <LinearLayout
-        android:id="@+id/name_container"
+    <TextView
+        android:id="@+id/birthday"
+        style="@style/EmployeeParams"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="@string/birthday"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_66"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_33"
+        app:layout_constraintTop_toBottomOf="@+id/specialty_value"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/name_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Name" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/surname_container"
+    <TextView
+        android:id="@+id/birthday_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_66"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_33"
+        app:layout_constraintTop_toBottomOf="@+id/birthday"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Birthday" />
 
-        <TextView
-            android:id="@+id/surname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/surname"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/surname_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Surname" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/birthday_container"
+    <TextView
+        android:id="@+id/age"
+        style="@style/EmployeeParams"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="@string/age"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specialty_value"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/birthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/birthday"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/birthday_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Birthday" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/age_container"
+    <TextView
+        android:id="@+id/age_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/age"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Age" />
 
-        <TextView
-            android:id="@+id/age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/age"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/age_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Age" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/specialty_container"
+    <TextView
+        android:id="@+id/gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="@string/gender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_66"
+        app:layout_constraintTop_toBottomOf="@+id/gender_value"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/specialty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/specialty"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/gender_value"
+        style="@style/EmployeeParams"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_66"
+        app:layout_constraintTop_toBottomOf="@+id/specialty_value"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Пол" />
 
-        <TextView
-            android:id="@+id/specialty_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Specialty" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/specialty_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_value"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Specialty" />
 
-</LinearLayout>
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_66"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_33"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearanceOverlay="@style/CircleImageView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

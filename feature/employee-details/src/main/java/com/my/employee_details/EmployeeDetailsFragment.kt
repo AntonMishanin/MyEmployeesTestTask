@@ -2,8 +2,10 @@ package com.my.employee_details
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.my.core.ComponentStore
 import com.my.core.ViewBindingFragment
 import com.my.employee_details.databinding.FragmentEmployeeDetailsBinding
@@ -26,16 +28,24 @@ class EmployeeDetailsFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        binding.toolbar.title = ""
+
         val viewModel by viewModels<EmployeeDetailsViewModel> { employeeDetailsViewModelFactory }
-        viewModel.state.onEach {
-            binding.nameValue.text = it.firstName
-            binding.surnameValue.text = it.lastName
-            binding.birthdayValue.text = it.birthday
-            binding.ageValue.text = it.age
-            binding.specialtyValue.text = it.specialty
+        viewModel.state.onEach { employee ->
+            binding.nameValue.text = employee.name
+            binding.birthdayValue.text = employee.birthday
+            binding.ageValue.text = employee.age
+            binding.specialtyValue.text = employee.specialty
+            binding.gender.text = employee.gender
+            Glide.with(this)
+                .load(employee.avatarUrl)
+                .placeholder(R.drawable.avatar_placeholder)
+                .error(R.drawable.avatar_placeholder)
+                .into(binding.avatar)
         }.launchIn(lifecycleScope)
 
-        binding.back.setOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             // TODO: think about navigation
             requireActivity().onBackPressed()
         }

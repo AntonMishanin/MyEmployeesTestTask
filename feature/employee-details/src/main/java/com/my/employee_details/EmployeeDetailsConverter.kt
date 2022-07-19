@@ -11,11 +11,12 @@ class EmployeeDetailsConverter : Converter<Employee, EmployeeDetails> {
 
     override fun convert(input: Employee) = EmployeeDetails(
         id = input.id,
-        firstName = input.firstName,
-        lastName = input.lastName,
+        avatarUrl = input.avatarUrl,
+        name = input.firstName + " " + input.lastName,
         birthday = input.birthday,
         age = input.age,
-        specialty = specialtiesToString(input.specialties)
+        specialty = specialtiesToString(input.specialties),
+        gender = "-"
     )
 
     private fun specialtiesToString(input: List<String>): String {
