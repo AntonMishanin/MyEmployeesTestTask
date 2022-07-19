@@ -12,7 +12,7 @@ class EmployeesConverter {
         lastName = input.lastName,
         birthday = input.birthday,
         avatarUrl = input.avatarUrl,
-        specialties = input.specialties.split(DELIMITERS)
+        specialties = input.specialties.split(DELIMITERS).filter { it.isNotBlank() }
     )
 
     fun convert(input: List<EmployeeDbo>) = input.map { convert(it) }
