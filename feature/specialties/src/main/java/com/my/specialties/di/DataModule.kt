@@ -1,7 +1,7 @@
 package com.my.specialties.di
 
 import android.content.Context
-import com.my.core.AppScope
+import com.my.core.FeatureScope
 import com.my.specialties.data.*
 import dagger.Module
 import dagger.Provides
@@ -13,7 +13,7 @@ import dagger.Provides
 @Module
 class DataModule {
 
-    @AppScope
+    @FeatureScope
     @Provides
     fun provideSpecialtiesRepository(
         specialtiesMemoryCache: SpecialtiesMemoryCache,

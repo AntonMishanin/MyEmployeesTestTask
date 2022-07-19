@@ -9,20 +9,21 @@ import com.my.employees_data.EmployeesStorageModule
 import com.my.specialties.di.DomainModule
 import com.my.employees_root.di.EmployeesRootModule
 import com.my.employees_root.data.NetworkModule
+import com.my.employees_root.di.EmployeesRootComponent
 import com.my.specialties.di.SpecialtiesModule
 import dagger.BindsInstance
 import dagger.Component
 
 @[AppScope Component(
-    modules = [DataModule::class, DomainModule::class, SpecialtiesModule::class,
-        EmployeesModule::class, AppModule::class, DomainModule::class, EmployeesRootModule::class,
-        NetworkModule::class, EmployeesStorageModule::class]
+    modules = [AppModule::class, EmployeesStorageModule::class]
 )]
 internal interface AppComponent {
 
     fun provideMainFragmentFactory(): MainFragmentFactory
 
     fun employeeDetailsComponent(): EmployeeDetailsComponent
+
+    fun employeesRootComponent(): EmployeesRootComponent
 
     @Component.Builder
     interface Builder {

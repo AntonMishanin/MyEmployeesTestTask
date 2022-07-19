@@ -4,8 +4,8 @@ package com.my.employees_root.data
  * @Author: Anton Mishanin
  * @Date: 7/12/2022
  */
-import com.my.core.AppScope
 import com.my.core.BuildConfigWrapper
+import com.my.core.FeatureScope
 import com.my.employees_data.EmployeesConverter
 import com.my.employees_data.*
 import com.my.employees.domain.FilterParamsRepository
@@ -26,7 +26,7 @@ import javax.inject.Named
 @Module(includes = [EmployeesRootDataModuleBinds::class])
 class NetworkModule {
 
-    @[Provides AppScope]
+    @[Provides FeatureScope]
     fun provideEmployeesRootRepository(
         remoteDataSource: EmployeesRemoteDataSource,
         employeesConverter: EmployeesConverter,
