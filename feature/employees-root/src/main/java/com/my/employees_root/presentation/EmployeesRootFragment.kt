@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.my.core.ComponentStore
 import com.my.core.ViewBindingFragment
 import com.my.employees_root.di.EmployeesRootFragmentFactory
 import com.my.employees_root.R
-import com.my.employees_root.data.EmployeesRootRepository
 import com.my.employees_root.databinding.FragmentEmployeesRootBinding
+import com.my.employees_root.di.EmployeesRootComponent
 import com.my.employees_root.di.EmployeesRootViewModelFactory
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 /**
  * @Author: Anton Mishanin
@@ -20,7 +20,8 @@ import kotlinx.coroutines.launch
  */
 class EmployeesRootFragment(
     private val fragmentFactory: EmployeesRootFragmentFactory,
-    private val employeesRootViewModelFactory: EmployeesRootViewModelFactory
+    private val employeesRootViewModelFactory: EmployeesRootViewModelFactory,
+    private val componentStore: ComponentStore
 ) : ViewBindingFragment<FragmentEmployeesRootBinding>(
     FragmentEmployeesRootBinding::inflate
 ) {
@@ -49,5 +50,12 @@ class EmployeesRootFragment(
         viewModel.state.onEach {
             // TODO: handle result
         }.launchIn(lifecycleScope)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (!requireActivity().isChangingConfigurations) {
+            componentStore.clear(EmployeesRootComponent::class.java)
+        }
     }
 }

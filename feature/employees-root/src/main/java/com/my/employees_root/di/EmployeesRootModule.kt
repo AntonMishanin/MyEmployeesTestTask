@@ -1,5 +1,7 @@
 package com.my.employees_root.di
 
+import com.my.core.ComponentStore
+import com.my.core.FeatureScope
 import com.my.employees.presentation.EmployeesFragment
 import com.my.employees_root.data.EmployeesRootRepository
 import com.my.employees_root.domain.RefreshEmployeesUseCase
@@ -18,8 +20,9 @@ class EmployeesRootModule {
     @Provides
     fun provideEmployeesRootFragment(
         fragmentFactory: EmployeesRootFragmentFactory,
-        employeesRootViewModelFactory: EmployeesRootViewModelFactory
-    ) = EmployeesRootFragment(fragmentFactory, employeesRootViewModelFactory)
+        employeesRootViewModelFactory: EmployeesRootViewModelFactory,
+        componentStore: ComponentStore
+    ) = EmployeesRootFragment(fragmentFactory, employeesRootViewModelFactory, componentStore)
 
     @Provides
     fun provideEmployeesRootFragmentFactory(
@@ -27,6 +30,7 @@ class EmployeesRootModule {
         employeesFragment: EmployeesFragment
     ) = EmployeesRootFragmentFactory(specialtiesFragment, employeesFragment)
 
+    @FeatureScope
     @Provides
     fun provideEmployeesRootViewModelFactory(
         refreshEmployeesUseCase: RefreshEmployeesUseCase

@@ -9,6 +9,7 @@ import com.my.core.ProvideComponent
 import com.my.employee_details.EmployeeDetailsFragment
 import com.my.employee_details.di.EmployeeDetailsComponent
 import com.my.employees.presentation.EmployeesNavigation
+import com.my.employees_root.di.EmployeesRootComponent
 import com.my.employees_root.presentation.EmployeesRootFragment
 
 // TODO: think about navigation
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity(), EmployeesNavigation {
 }
 
 class MainFragmentFactory(
-    private val employeesRootFragment: EmployeesRootFragment,
     private val componentStore: ComponentStore,
     private val provideComponent: ProvideComponent
 ) : FragmentFactory() {
@@ -55,7 +55,16 @@ class MainFragmentFactory(
             else -> super.instantiate(classLoader, className)
         }
 
-    fun employeesRootFragment() = employeesRootFragment
+    // TODO: think about duplication
+    fun employeesRootFragment() : EmployeesRootFragment {
+        val clazz = EmployeesRootComponent::class.java
+        var component = componentStore.get(clazz)
+        if (component == null) {
+            component = provideComponent.provideComponent<AppComponent>().employeesRootComponent()
+            componentStore.add(component, clazz)
+        }
+        return component.fragment()
+    }
 
     fun employeeDetailsFragment(): EmployeeDetailsFragment {
         val clazz = EmployeeDetailsComponent::class.java

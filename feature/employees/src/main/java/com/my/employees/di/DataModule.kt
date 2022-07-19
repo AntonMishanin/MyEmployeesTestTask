@@ -1,7 +1,7 @@
 package com.my.employees.di
 
-import com.my.core.AppScope
 import com.my.core.DispatchersWrapper
+import com.my.core.FeatureScope
 import com.my.employees_data.EmployeesConverter
 import com.my.employees.data.EmployeesMemoryCache
 import com.my.employees.data.EmployeesRepositoryImpl
@@ -17,7 +17,7 @@ import dagger.Provides
 @Module
 class DataModule {
 
-    @[Provides AppScope]
+    @[Provides FeatureScope]
     fun provideEmployeesAndSpecialtyRepository(
         employeesStorage: EmployeesStorage,
         employeesConverter: EmployeesConverter,

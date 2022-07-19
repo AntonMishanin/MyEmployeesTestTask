@@ -1,12 +1,16 @@
 package com.my.myemployeestesttask
 
 import android.app.Application
+import android.content.Context
 import com.my.core.*
 import com.my.employee_details.di.DaggerEmployeeDetailsComponent
 import com.my.employee_details.di.EmployeeDetailsComponent
 import com.my.employees_data.EmployeesConverter
 import com.my.employees_data.EmployeesStorage
+import com.my.employees_root.di.DaggerEmployeesRootComponent
+import com.my.employees_root.di.EmployeesRootComponent
 import com.my.employees_root.presentation.EmployeesRootFragment
+import dagger.BindsInstance
 import dagger.Module
 import dagger.Provides
 
@@ -32,12 +36,28 @@ class AppModule {
         .build()
 
     @Provides
+    internal fun provideEmployeesRootComponent(
+        employeesStorage: EmployeesStorage,
+        employeesConverter: EmployeesConverter,
+        dispatchers: DispatchersWrapper,
+        buildConfigWrapper: BuildConfigWrapper,
+        context: Context,
+        componentStore: ComponentStore
+    ): EmployeesRootComponent = DaggerEmployeesRootComponent
+        .builder()
+        .employeesStorage(employeesStorage)
+        .employeesConverter(employeesConverter)
+        .dispatchers(dispatchers)
+        .buildConfigWrapper(buildConfigWrapper)
+        .context(context)
+        .componentStore(componentStore)
+        .build()
+
+    @Provides
     internal fun provideMainFragmentFactory(
-        employeesRootFragment: EmployeesRootFragment,
         componentStore: ComponentStore,
         provideComponent: ProvideComponent
     ) = MainFragmentFactory(
-        employeesRootFragment,
         componentStore,
         provideComponent
     )
