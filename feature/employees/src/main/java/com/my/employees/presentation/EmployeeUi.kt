@@ -13,9 +13,9 @@ interface EmployeeUi {
 
     data class Content(
         override val id: String,
-        val firstName: String,
-        val lastName: String,
-        val age: String
+        val name: String,
+        val age: String,
+        val avatarUrl: String
     ) : EmployeeUi {
 
         override fun match(data: EmployeeUi) = this == data
