@@ -11,9 +11,9 @@ class EmployeeUiConverter : IterableConverter<Employee, EmployeeUi>() {
 
     override fun convert(input: Employee) = EmployeeUi.Content(
         id = input.id,
-        firstName = input.firstName,
-        lastName = input.lastName,
-        age = input.age
+        name = "${input.firstName} ${input.lastName}",
+        age = input.age,
+        avatarUrl = input.avatarUrl
     )
 
     fun progress() = listOf(EmployeeUi.Progress())

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.my.employees.R
 import com.my.employees.databinding.ItemEmployeeBinding
 import com.my.employees.databinding.ItemErrorBinding
@@ -50,9 +51,13 @@ class EmployeesViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 
     fun bind(employee: EmployeeUi.Content, onItemClicked: (EmployeeUi) -> Unit) = with(binding) {
 
-        nameValue.text = employee.firstName
-        surnameValue.text = employee.lastName
+        nameValue.text = employee.name
         ageValue.text = employee.age
+        Glide.with(itemView)
+            .load(employee.avatarUrl)
+            .placeholder(R.drawable.avatar_placeholder)
+            .error(R.drawable.avatar_placeholder)
+            .into(binding.avatar)
 
         root.setOnClickListener {
             onItemClicked.invoke(employee)
