@@ -17,7 +17,7 @@ Application for watching list of employees and filter it by specialties. Also yo
  - Dagger2
 
 ### Screenshots
-<img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/readme/screenshots/photo_2022-07-20_19-02-47%20(2).jpg" width="256"/> <img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/readme/screenshots/photo_2022-07-20_19-05-20.jpg" width="256"/> <img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/readme/screenshots/photo_2022-07-20_19-02-47.jpg" width="256"/>
+<img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/develop/screenshots/photo_2022-07-20_19-02-47%20(2).jpg" width="256"/> <img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/develop/screenshots/photo_2022-07-20_19-05-20.jpg" width="256"/> <img src="https://github.com/AntonMishanin/MyEmployeesTestTask/blob/develop/screenshots/photo_2022-07-20_19-02-47.jpg" width="256"/>
 
 ### TODO:
 1. Pagination
