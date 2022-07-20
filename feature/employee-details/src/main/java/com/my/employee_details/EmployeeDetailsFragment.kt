@@ -46,8 +46,7 @@ class EmployeeDetailsFragment(
         }.launchIn(lifecycleScope)
 
         binding.toolbar.setNavigationOnClickListener {
-            // TODO: think about navigation
-            requireActivity().onBackPressed()
+            viewModel.onBackClicked()
         }
     }
 

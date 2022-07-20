@@ -1,6 +1,7 @@
 package com.my.employees.di
 
 import com.my.core.DispatchersWrapper
+import com.my.core.Navigation
 import com.my.employees.domain.EmployeesRepository
 import com.my.employees.domain.FilterParamsRepository
 import com.my.employees.presentation.EmployeeUiConverter
@@ -25,11 +26,13 @@ class EmployeesModule {
     fun provideEmployeesViewModelFactory(
         observeEmployeesUseCase: ObserveEmployeesUseCase,
         dispatchers: DispatchersWrapper,
-        employeeUiConverter: EmployeeUiConverter
+        employeeUiConverter: EmployeeUiConverter,
+        navigation: Navigation
     ) = EmployeesViewModelFactory(
         observeEmployeesUseCase,
         dispatchers,
-        employeeUiConverter
+        employeeUiConverter,
+        navigation
     )
 
     @Provides

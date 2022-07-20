@@ -9,6 +9,7 @@ import com.my.employees_data.EmployeesConverter
 import com.my.employees_data.EmployeesStorage
 import com.my.employees_root.di.DaggerEmployeesRootComponent
 import com.my.employees_root.di.EmployeesRootComponent
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
@@ -16,21 +17,23 @@ import dagger.Provides
  * @Author: Anton Mishanin
  * @Date: 7/13/2022
  */
-@Module
-class AppModule {
+@Module(includes = [AppModuleBinds::class])
+internal class AppModule {
 
     @Provides
     internal fun provideEmployeeDetailsComponent(
         employeesStorage: EmployeesStorage,
         employeesConverter: EmployeesConverter,
         dispatchers: DispatchersWrapper,
-        componentStore: ComponentStore
+        componentStore: ComponentStore,
+        appNavigation: AppNavigation
     ): EmployeeDetailsComponent = DaggerEmployeeDetailsComponent
         .builder()
         .employeesStorage(employeesStorage)
         .employeesConverter(employeesConverter)
         .dispatchers(dispatchers)
         .componentStore(componentStore)
+        .navigation(appNavigation)
         .build()
 
     @Provides
@@ -40,7 +43,8 @@ class AppModule {
         dispatchers: DispatchersWrapper,
         buildConfigWrapper: BuildConfigWrapper,
         context: Context,
-        componentStore: ComponentStore
+        componentStore: ComponentStore,
+        appNavigation: AppNavigation
     ): EmployeesRootComponent = DaggerEmployeesRootComponent
         .builder()
         .employeesStorage(employeesStorage)
@@ -49,7 +53,13 @@ class AppModule {
         .buildConfigWrapper(buildConfigWrapper)
         .context(context)
         .componentStore(componentStore)
+        .navigation(appNavigation)
         .build()
+
+    @[Provides AppScope]
+    internal fun provideAppNavigation(
+        mainFragmentFactory: MainFragmentFactory
+    ) = AppNavigation(mainFragmentFactory)
 
     @Provides
     internal fun provideMainFragmentFactory(
@@ -81,4 +91,11 @@ class AppModule {
 
     @[Provides AppScope]
     internal fun provideComponentStore() = ComponentStore()
+}
+
+@Module
+internal abstract class AppModuleBinds {
+
+    @Binds
+    abstract fun bindNavigation(implementation: AppNavigation): Navigation
 }

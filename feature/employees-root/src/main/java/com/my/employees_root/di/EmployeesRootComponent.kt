@@ -1,10 +1,7 @@
 package com.my.employees_root.di
 
 import android.content.Context
-import com.my.core.BuildConfigWrapper
-import com.my.core.ComponentStore
-import com.my.core.DispatchersWrapper
-import com.my.core.FeatureScope
+import com.my.core.*
 import com.my.employees.di.DataModule
 import com.my.employees.di.EmployeesModule
 import com.my.employees_data.EmployeesConverter
@@ -49,6 +46,9 @@ interface EmployeesRootComponent {
 
         @BindsInstance
         fun componentStore(componentStore: ComponentStore): Builder
+
+        @BindsInstance
+        fun navigation(navigation: Navigation): Builder
 
         fun build(): EmployeesRootComponent
     }
