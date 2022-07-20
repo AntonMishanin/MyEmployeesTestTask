@@ -24,9 +24,10 @@ class EmployeesFragment(
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel by viewModels<EmployeesViewModel> { employeesViewModelFactory }
-        val adapter = EmployeesAdapter({
-            (requireActivity() as? EmployeesNavigation)?.toEmployeeDetails(it.id)
-        }, onRefreshClicked = viewModel::refreshEmployees)
+        val adapter = EmployeesAdapter(
+            onItemClicked = viewModel::onEmployeeClicked,
+            onRefreshClicked = viewModel::onRefreshClicked
+        )
         binding.list.adapter = adapter
 
         viewModel.state.onEach(adapter::submitList).launchIn(lifecycleScope)

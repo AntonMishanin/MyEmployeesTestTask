@@ -3,14 +3,8 @@ package com.my.myemployeestesttask
 import android.app.Application
 import com.my.core.AppScope
 import com.my.employee_details.di.EmployeeDetailsComponent
-import com.my.employees.di.EmployeesModule
-import com.my.employees.di.DataModule
 import com.my.employees_data.EmployeesStorageModule
-import com.my.specialties.di.DomainModule
-import com.my.employees_root.di.EmployeesRootModule
-import com.my.employees_root.data.NetworkModule
 import com.my.employees_root.di.EmployeesRootComponent
-import com.my.specialties.di.SpecialtiesModule
 import dagger.BindsInstance
 import dagger.Component
 
@@ -19,7 +13,7 @@ import dagger.Component
 )]
 internal interface AppComponent {
 
-    fun provideMainFragmentFactory(): MainFragmentFactory
+    fun provideAppNavigation(): AppNavigation
 
     fun employeeDetailsComponent(): EmployeeDetailsComponent
 
