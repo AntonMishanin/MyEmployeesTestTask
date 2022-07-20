@@ -21,6 +21,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildTypes {
+        release {
+            buildConfigField "String", "EMPLOYEES_BASE_URL", '"https://gitlab.65apps.com/"'
+        }
+
+        debug {
+            buildConfigField "String", "EMPLOYEES_BASE_URL", '"https://gitlab.65apps.com/"'
+        }
+    }
 }
 
 dependencies {

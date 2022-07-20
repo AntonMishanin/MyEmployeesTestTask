@@ -56,7 +56,7 @@ class MainFragmentFactory(
         }
 
     // TODO: think about duplication
-    fun employeesRootFragment() : EmployeesRootFragment {
+    fun employeesRootFragment(): EmployeesRootFragment {
         val clazz = EmployeesRootComponent::class.java
         var component = componentStore.get(clazz)
         if (component == null) {

@@ -9,8 +9,6 @@ import com.my.employees_data.EmployeesConverter
 import com.my.employees_data.EmployeesStorage
 import com.my.employees_root.di.DaggerEmployeesRootComponent
 import com.my.employees_root.di.EmployeesRootComponent
-import com.my.employees_root.presentation.EmployeesRootFragment
-import dagger.BindsInstance
 import dagger.Module
 import dagger.Provides
 
@@ -76,8 +74,7 @@ class AppModule {
     @[Provides AppScope]
     internal fun provideBuildConfigWrapper() = object : BuildConfigWrapper {
 
-        // TODO: move to BuildConfig
-        override fun baseUrl() = "https://gitlab.65apps.com/"
+        override fun baseUrl() = BuildConfig.EMPLOYEES_BASE_URL
 
         override fun isDebug() = BuildConfig.DEBUG
     }
