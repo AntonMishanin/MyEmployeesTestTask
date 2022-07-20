@@ -1,11 +1,12 @@
 package com.my.employees.di
 
 import com.my.core.DispatchersWrapper
-import com.my.employees.EmployeeUiConverter
-import com.my.employees.EmployeesFragment
-import com.my.employees_domain.employees.ObserveEmployeesUseCase
-import com.my.employees_domain.employees.RefreshEmployeesUseCase
-import com.my.specialties.di.SpecialtiesFragmentFactory
+import com.my.core.Navigation
+import com.my.employees.domain.EmployeesRepository
+import com.my.employees.domain.FilterParamsRepository
+import com.my.employees.presentation.EmployeeUiConverter
+import com.my.employees.presentation.EmployeesFragment
+import com.my.employees.domain.ObserveEmployeesUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -17,30 +18,29 @@ import dagger.Provides
 class EmployeesModule {
 
     @Provides
-    fun provideEmployeesFragmentFactory(
-        specialtiesFragment: EmployeesFragment,
-        specialtiesFragmentFactory: SpecialtiesFragmentFactory
-    ) = EmployeesFragmentFactory(specialtiesFragment, specialtiesFragmentFactory)
-
-    @Provides
     fun provideEmployeesFragment(
-        employeesViewModelFactory: EmployeesViewModelFactory,
-        specialtiesFragmentFactory: SpecialtiesFragmentFactory
-    ) = EmployeesFragment(employeesViewModelFactory, specialtiesFragmentFactory)
+        employeesViewModelFactory: EmployeesViewModelFactory
+    ) = EmployeesFragment(employeesViewModelFactory)
 
     @Provides
     fun provideEmployeesViewModelFactory(
         observeEmployeesUseCase: ObserveEmployeesUseCase,
-        refreshEmployeesUseCase: RefreshEmployeesUseCase,
         dispatchers: DispatchersWrapper,
-        employeeUiConverter: EmployeeUiConverter
+        employeeUiConverter: EmployeeUiConverter,
+        navigation: Navigation
     ) = EmployeesViewModelFactory(
         observeEmployeesUseCase,
-        refreshEmployeesUseCase,
         dispatchers,
-        employeeUiConverter
+        employeeUiConverter,
+        navigation
     )
 
     @Provides
     fun provideEmployeeUiConverter() = EmployeeUiConverter()
+
+    @Provides
+    fun provideObserveEmployeesUseCase(
+        employeesRepository: EmployeesRepository,
+        filterParamsRepository: FilterParamsRepository
+    ) = ObserveEmployeesUseCase(employeesRepository, filterParamsRepository)
 }

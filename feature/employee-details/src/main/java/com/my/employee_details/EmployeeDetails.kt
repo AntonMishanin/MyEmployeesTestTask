@@ -6,20 +6,22 @@ package com.my.employee_details
  */
 data class EmployeeDetails(
     val id: String,
-    val firstName: String,
-    val lastName: String,
+    val avatarUrl: String,
+    val name: String,
     val birthday: String,
     val age: String,
-    val specialty: String
+    val specialty: String,
+    val gender: String
 ) {
     companion object {
         fun empty() = EmployeeDetails(
             id = "",
-            firstName = "",
-            lastName = "",
+            avatarUrl = "",
+            name = "",
             birthday = "",
             age = "",
-            specialty = ""
+            specialty = "",
+            gender = ""
         )
     }
 }

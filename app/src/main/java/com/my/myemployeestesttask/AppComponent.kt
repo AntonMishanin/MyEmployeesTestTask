@@ -2,25 +2,22 @@ package com.my.myemployeestesttask
 
 import android.app.Application
 import com.my.core.AppScope
-import com.my.employee_details.di.EmployeeDetailsModule
-import com.my.employees.di.EmployeesFragmentFactory
-import com.my.employees.di.EmployeesModule
-import com.my.employees_data.EmployeesDataModule
-import com.my.employees_domain.employees.EmployeesDomainModule
-import com.my.employees_domain.specialties.SpecialtiesDomainModule
-import com.my.specialties.di.SpecialtiesFragmentFactory
-import com.my.specialties.di.SpecialtiesModule
+import com.my.employee_details.di.EmployeeDetailsComponent
+import com.my.employees_data.EmployeesStorageModule
+import com.my.employees_root.di.EmployeesRootComponent
 import dagger.BindsInstance
 import dagger.Component
 
 @[AppScope Component(
-    modules = [EmployeesDataModule::class, SpecialtiesModule::class,
-        SpecialtiesDomainModule::class, AppModule::class, EmployeesModule::class, EmployeesDomainModule::class,
-        EmployeeDetailsModule::class]
+    modules = [AppModule::class, EmployeesStorageModule::class]
 )]
 internal interface AppComponent {
 
-    fun provideMainFragmentFactory(): MainFragmentFactory
+    fun provideAppNavigation(): AppNavigation
+
+    fun employeeDetailsComponent(): EmployeeDetailsComponent
+
+    fun employeesRootComponent(): EmployeesRootComponent
 
     @Component.Builder
     interface Builder {
@@ -29,5 +26,15 @@ internal interface AppComponent {
         fun application(application: Application): Builder
 
         fun build(): AppComponent
+    }
+
+    class Factory(
+        private val application: Application
+    ) : com.my.core.Component.Factory<AppComponent> {
+
+        override fun create(): AppComponent = DaggerAppComponent
+            .builder()
+            .application(application)
+            .build()
     }
 }

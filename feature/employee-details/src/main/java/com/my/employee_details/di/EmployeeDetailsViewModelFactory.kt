@@ -3,19 +3,21 @@ package com.my.employee_details.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.my.core.DispatchersWrapper
+import com.my.core.Navigation
 import com.my.employee_details.EmployeeDetailsConverter
 import com.my.employee_details.EmployeeDetailsViewModel
-import com.my.employees_domain.employees.FetchEmployeeUseCase
+import com.my.employee_details.domain.FetchEmployeeUseCase
 
 class EmployeeDetailsViewModelFactory(
     private val fetchEmployeeUseCase: FetchEmployeeUseCase,
     private val dispatchers: DispatchersWrapper,
-    private val employeeDetailsConverter: EmployeeDetailsConverter
+    private val employeeDetailsConverter: EmployeeDetailsConverter,
+    private val navigation: Navigation
 ) : ViewModelProvider.Factory {
 
     private var id = ""
 
-    fun setArguments(id: String){
+    fun setArguments(id: String) {
         this.id = id
     }
 
@@ -23,6 +25,7 @@ class EmployeeDetailsViewModelFactory(
         fetchEmployeeUseCase,
         dispatchers,
         employeeDetailsConverter,
-        id
+        id,
+        navigation
     ) as T
 }

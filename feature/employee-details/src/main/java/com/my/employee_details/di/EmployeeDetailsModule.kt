@@ -1,9 +1,16 @@
 package com.my.employee_details.di
 
+import com.my.core.ComponentStore
 import com.my.core.DispatchersWrapper
+import com.my.core.FeatureScope
+import com.my.core.Navigation
 import com.my.employee_details.EmployeeDetailsConverter
 import com.my.employee_details.EmployeeDetailsFragment
-import com.my.employees_domain.employees.FetchEmployeeUseCase
+import com.my.employee_details.data.EmployeeRepositoryImpl
+import com.my.employee_details.domain.EmployeeRepository
+import com.my.employee_details.domain.FetchEmployeeUseCase
+import com.my.employees_data.EmployeesConverter
+import com.my.employees_data.EmployeesStorage
 import dagger.Module
 import dagger.Provides
 
@@ -15,26 +22,36 @@ import dagger.Provides
 class EmployeeDetailsModule {
 
     @Provides
-    fun provideEmployeeDetailsFragmentFactory(
-        employeeDetailsFragment: EmployeeDetailsFragment
-    ) = EmployeeDetailsFragmentFactory(employeeDetailsFragment)
-
-    @Provides
     fun provideEmployeeDetailsFragment(
-        employeeDetailsViewModelFactory: EmployeeDetailsViewModelFactory
-    ) = EmployeeDetailsFragment(employeeDetailsViewModelFactory)
+        employeeDetailsViewModelFactory: EmployeeDetailsViewModelFactory,
+        componentStore: ComponentStore
+    ) = EmployeeDetailsFragment(employeeDetailsViewModelFactory, componentStore)
 
+    @FeatureScope
     @Provides
     fun provideEmployeeDetailsViewModelFactory(
         fetchEmployeeUseCase: FetchEmployeeUseCase,
         dispatchers: DispatchersWrapper,
-        employeeDetailsConverter: EmployeeDetailsConverter
+        employeeDetailsConverter: EmployeeDetailsConverter,
+        navigation: Navigation
     ) = EmployeeDetailsViewModelFactory(
         fetchEmployeeUseCase,
         dispatchers,
-        employeeDetailsConverter
+        employeeDetailsConverter,
+        navigation
     )
 
     @Provides
     fun provideEmployeeDetailsConverter() = EmployeeDetailsConverter()
+
+    @Provides
+    fun provideFetchEmployeeUseCase(
+        employeeRepository: EmployeeRepository
+    ) = FetchEmployeeUseCase(employeeRepository)
+
+    @Provides
+    fun provideEmployeeRepository(
+        employeesStorage: EmployeesStorage,
+        employeesConverter: EmployeesConverter
+    ): EmployeeRepository = EmployeeRepositoryImpl(employeesStorage, employeesConverter)
 }
